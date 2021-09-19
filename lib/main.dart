@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'Module/Home/view/home.dart';
+import 'Services/tmdb.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,17 +13,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
       home: Home(),
@@ -30,3 +23,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// 46d6718883903f0428e3c06cd4c38c12  api  v3
+
+// eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NmQ2NzE4ODgzOTAzZjA0MjhlM2MwNmNkNGMzOGMxMiIsInN1YiI6IjYxNDcxMzM4YzI4MjNhMDA0NGRjY2RlYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.m3UipJDQ4PKSIh-faz1DmPNXu-wAFQVrA8HGotG3FYg  v4
