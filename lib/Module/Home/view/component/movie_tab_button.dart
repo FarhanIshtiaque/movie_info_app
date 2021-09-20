@@ -19,7 +19,7 @@ class MovieTab extends StatelessWidget {
           borderRadius: BorderRadius.circular(25.0),
         ),
         child: TabBar(
-          
+
           indicator: BubbleTabIndicator(
 
             tabBarIndicatorSize: TabBarIndicatorSize.tab,

@@ -14,7 +14,7 @@ import 'component/movie_tab_button.dart';
 class Home extends StatelessWidget {
   final state = Get.put(PopularMovieState());
   final genreState = Get.put(GenresState());
-Home(){   print("Printaed");
+Home(){
   state.fetchMovies();
   genreState.getGenres();
 }

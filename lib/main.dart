@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'Module/Home/view/home.dart';
-import 'Services/tmdb.dart';
 
 void main() {
   runApp(MyApp());

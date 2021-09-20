@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:movie_app/Module/Details_Page/model/movie_details_model.dart';
 import 'package:movie_app/Module/Home/model/PopularResponse.dart';
 import 'package:movie_app/Module/Home/model/genre_model.dart';
 import 'package:movie_app/Module/Home/model/popular_request.dart';
 
 class TMDB {
   static const String imageUrl = 'https://image.tmdb.org/t/p/w200';
+  static const String imageUrlDetails = 'https://image.tmdb.org/t/p/w200';
   final String baseUrl = 'https://api.themoviedb.org/3';
   final String apiKey = '46d6718883903f0428e3c06cd4c38c12';
   final String language = 'en-US';
@@ -50,6 +52,18 @@ class TMDB {
         'api_key': this.apiKey, 'language': this.language
       });
       return Genres.fromJson(response.data);
+    }
+    on DioError catch(ex){
+      throw Exception(ex.message);
+    }
+  }
+
+  Future<MovieDetailsModel> fetchMovieById(int id) async {
+    try {
+      Response response = await dio.get('/movie/${id}', queryParameters: {
+        'api_key': this.apiKey,
+      });
+      return MovieDetailsModel.fromJson(response.data);
     }
     on DioError catch(ex){
       throw Exception(ex.message);
