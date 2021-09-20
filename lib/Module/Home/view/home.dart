@@ -6,6 +6,7 @@ import 'package:movie_app/Module/Home/state/genre_state.dart';
 import 'package:movie_app/Module/Home/state/home_state.dart';
 import 'package:movie_app/Module/Home/state/popular_state.dart';
 import 'package:movie_app/Module/Home/state/top_rated_state.dart';
+import 'package:movie_app/Module/Home/view/component/movie_card_shimmer.dart';
 import 'package:movie_app/constant.dart';
 import 'component/button_widget.dart';
 import 'component/movie_card.dart';
@@ -17,15 +18,15 @@ class Home extends StatelessWidget {
   final genreState = Get.put(GenresState());
   HomeState homeState = Get.put(HomeState());
 
-Home(){
-  state.fetchMovies();
-  topRatedState.fetchTopRatedMovies();
-  genreState.getGenres();
-}
+  Home() {
+    state.fetchMovies();
+    topRatedState.fetchTopRatedMovies();
+    genreState.getGenres();
+  }
+
   @override
   Widget build(BuildContext context) {
-
-final int buttonValue;
+    final int buttonValue;
 
     return SafeArea(
       child: Scaffold(
@@ -48,11 +49,9 @@ final int buttonValue;
               SizedBox(
                 height: 15,
               ),
-
               MovieTab(
-                onTap: (value){
+                onTap: (value) {
                   homeState.setSelectedId(value);
-
                 },
               ),
               SizedBox(
@@ -60,21 +59,35 @@ final int buttonValue;
               ),
               Expanded(
                 child: Obx(() {
-
-                  return ListView.builder(
+                  return state.movies.length <1
+                      ? ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
-                      itemCount: homeState.selectedId.value==0? state.movies.length + 1:topRatedState.movies.length+1,
+                      itemCount: 7,
                       itemBuilder: (context, index) {
-                        return index == state.movies.length
-                            ? ButtonWidget(
-                                onTap: () {
-                                  print('Taped');
-                                  state.loadNextPage();
-                                },
-                              )
-                            : MovieCard(movie:homeState.selectedId.value==0?state.movies.value[index]:topRatedState.movies.value[index] ,);
-                      });
+                        return MovieCardShimmer();
+                      })
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: homeState.selectedId.value == 0
+                              ? state.movies.length + 1
+                              : topRatedState.movies.length + 1,
+                          itemBuilder: (context, index) {
+                            return index == state.movies.length
+                                ? ButtonWidget(
+                                    onTap: () {
+                                      print('Taped');
+                                      state.loadNextPage();
+                                      topRatedState.loadNextPage();
+                                    },
+                                  )
+                                : MovieCard(
+                                    movie: homeState.selectedId.value == 0
+                                        ? state.movies.value[index]
+                                        : topRatedState.movies.value[index],
+                                  );
+                          });
                 }),
               ),
             ],
@@ -84,4 +97,3 @@ final int buttonValue;
     );
   }
 }
-
