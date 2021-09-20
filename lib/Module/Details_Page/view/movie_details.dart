@@ -101,7 +101,7 @@ class MovieDetails extends StatelessWidget {
                               height: 5,
                             ),
                             Text(
-                              "dsdad",
+                              movieDetails.genres.map((e) => e.name).join(', '),
                               style: GoogleFonts.poppins(
                                 color: Colors.white70,
                                 fontSize: 12,
@@ -122,7 +122,7 @@ class MovieDetails extends StatelessWidget {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                                  padding: const EdgeInsets.symmetric(horizontal: 6),
                                   child: Container(
                                     height: 12,
                                     width: 1,
@@ -136,6 +136,22 @@ class MovieDetails extends StatelessWidget {
                                     fontSize: 12,
                                   ),
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                                  child: Container(
+                                    height: 12,
+                                    width: 1,
+                                    color: Colors.white54,
+                                  ),
+                                ),
+                                Text(
+                                  movieDetails.spokenLanguages.map((e) => e.name).join(', '),
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white70,
+                                    fontSize: 12,
+                                  ),
+                                ),
+
                               ],
                             ),
                             SizedBox(
