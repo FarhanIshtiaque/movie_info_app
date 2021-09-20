@@ -4,6 +4,7 @@ import 'package:movie_app/Module/Details_Page/model/movie_details_model.dart';
 import 'package:movie_app/Module/Home/model/PopularResponse.dart';
 import 'package:movie_app/Module/Home/model/genre_model.dart';
 import 'package:movie_app/Module/Home/model/popular_request.dart';
+import 'package:movie_app/Module/Home/model/top_rated_request.dart';
 
 class TMDB {
   static const String imageUrl = 'https://image.tmdb.org/t/p/w200';
@@ -80,6 +81,31 @@ class TMDB {
       return CastModel.fromJson(response.data);
     }
     on DioError catch(ex){
+      throw Exception(ex.message);
+    }
+  }
+
+
+
+
+
+  Future<PopularResponse?> getTopRated({
+    required String page,
+    required String region}) async {
+    TopRatedRequest tr = TopRatedRequest(
+        api_key: this.apiKey,
+        language: this.language,
+        page: page,
+        region: region);
+    try {
+      Response response =
+      await dio.get("/movie/top_rated", queryParameters: tr.toMap());
+      return PopularResponse.fromJson(response.data);
+    } on DioError catch (ex) {
+      if (ex.type == DioErrorType.connectTimeout) {
+        throw Exception("Connection  Timeout Exception");
+      }
+      print(ex);
       throw Exception(ex.message);
     }
   }

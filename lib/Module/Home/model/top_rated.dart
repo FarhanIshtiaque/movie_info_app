@@ -1,17 +1,17 @@
-class PopularResponse {
+class TopRated {
   int page;
   List<Movies> results;
   int totalPages;
   int totalResults;
 
-  PopularResponse(
+  TopRated(
       {required this.page,
-      required this.results,
-      required this.totalPages,
-      required this.totalResults});
+        required this.results,
+        required this.totalPages,
+        required this.totalResults});
 
-  factory PopularResponse.fromJson(Map<String, dynamic> json) {
-    return PopularResponse(
+  factory TopRated.fromJson(Map<String, dynamic> json) {
+    return TopRated(
         page: json["page"] ?? json["page"],
         results: json['results'] != null
             ? json['results'].map<Movies>((json) => Movies.fromJson(json)).toList()
@@ -50,19 +50,19 @@ class Movies {
 
   Movies(
       {required this.adult,
-      required this.backdropPath,
-      required this.genreIds,
-      required this.id,
-      required this.originalLanguage,
-      required this.originalTitle,
-      required this.overview,
-      required this.popularity,
-      required this.posterPath,
-      required this.releaseDate,
-      required this.title,
-      required this.video,
-      required this.voteAverage,
-      required this.voteCount});
+        required this.backdropPath,
+        required this.genreIds,
+        required this.id,
+        required this.originalLanguage,
+        required this.originalTitle,
+        required this.overview,
+        required this.popularity,
+        required this.posterPath,
+        required this.releaseDate,
+        required this.title,
+        required this.video,
+        required this.voteAverage,
+        required this.voteCount});
 
   factory Movies.fromJson(Map<String, dynamic> json) {
     return Movies(

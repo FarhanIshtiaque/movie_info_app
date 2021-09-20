@@ -1,13 +1,16 @@
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
 
+
 class MovieTab extends StatelessWidget {
   const MovieTab({
-    Key? key,
+    Key? key, required this.onTap,
   }) : super(key: key);
-
+final ValueChanged onTap;
   @override
   Widget build(BuildContext context) {
+
+
     return DefaultTabController(
       length: 2,
       child: Container(
@@ -38,9 +41,10 @@ class MovieTab extends StatelessWidget {
             Text('Popular'),
             Text('Top Rated'),
           ],
-          onTap: (index) {},
+          onTap: onTap,
         ),
       ),
     );
   }
+
 }

@@ -90,7 +90,9 @@ class MovieDetails extends StatelessWidget {
                               itemBuilder: (context, index) => Icon(
                                 Icons.star,
                                 color: Colors.amber,
+
                               ),
+                              unratedColor: Colors.white38,
                               itemCount: 5,
                               itemSize: 16.0,
                               direction: Axis.horizontal,

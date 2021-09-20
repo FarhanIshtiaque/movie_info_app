@@ -11,7 +11,7 @@ import 'package:movie_app/constant.dart';
 class MovieCard extends StatelessWidget {
   late final Movies movie;
 
-  MovieCard(this.movie);
+  MovieCard({required this.movie});
 
   GenresState genresState = Get.find();
 
