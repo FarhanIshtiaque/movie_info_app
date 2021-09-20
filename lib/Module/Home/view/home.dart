@@ -12,6 +12,7 @@ import 'component/button_widget.dart';
 import 'component/movie_card.dart';
 import 'component/movie_tab_button.dart';
 
+
 class Home extends StatelessWidget {
   final state = Get.put(PopularMovieState());
   final topRatedState = Get.put(TopRatedState());
@@ -26,7 +27,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int buttonValue;
+
 
     return SafeArea(
       child: Scaffold(
@@ -49,6 +50,7 @@ class Home extends StatelessWidget {
               SizedBox(
                 height: 15,
               ),
+
               MovieTab(
                 onTap: (value) {
                   homeState.setSelectedId(value);
@@ -76,6 +78,7 @@ class Home extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return index == state.movies.length
                                 ? ButtonWidget(
+                              buttonText: "See More",
                                     onTap: () {
                                       print('Taped');
                                       state.loadNextPage();

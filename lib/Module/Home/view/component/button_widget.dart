@@ -3,11 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ButtonWidget extends StatelessWidget {
   GestureTapCallback onTap;
-  ButtonWidget({required this.onTap});
+  final String buttonText;
+  ButtonWidget({required this.onTap, required this.buttonText});
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+
     final width = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.only(top: 20, bottom: 40),
@@ -26,7 +27,7 @@ class ButtonWidget extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              "See More",
+              buttonText,
               style: GoogleFonts.poppins(
                 fontSize: 14,
                 color: Colors.white,

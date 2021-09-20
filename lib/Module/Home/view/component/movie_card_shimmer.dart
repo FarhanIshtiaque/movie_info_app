@@ -18,7 +18,7 @@ class MovieCardShimmer extends StatelessWidget {
             Shimmer.fromColors(
               baseColor: Colors.white.withOpacity(.1),
               highlightColor: Colors.white.withOpacity(.2),
-              
+
               child: Container(
                 height: height * .17,
                 width: width * .85,
