@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:get/get.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:movie_app/Module/Details_Page/model/cast_model.dart';
 import 'package:movie_app/Module/Details_Page/model/movie_details_model.dart';
-import 'package:movie_app/Module/Home/model/PopularResponse.dart';
-import 'package:movie_app/Module/Home/state/genre_state.dart';
 import 'package:movie_app/Services/tmdb.dart';
 import 'package:movie_app/constant.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'component/cast_widget.dart';
 
 class MovieDetails extends StatelessWidget {
- late MovieDetailsModel movieDetails;
+  late MovieDetailsModel movieDetails;
+  late CastModel credit;
 
-  MovieDetails(this.movieDetails) ;
+  MovieDetails(this.movieDetails, this.credit);
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    GenresState genresState = Get.find();
 
     return SafeArea(
       child: Scaffold(
@@ -59,7 +57,7 @@ class MovieDetails extends StatelessWidget {
                         },
                         blendMode: BlendMode.dstIn,
                         child: Image.network(
-                          TMDB.imageUrlDetails+movieDetails.posterPath,
+                          TMDB.imageUrlDetails + movieDetails.posterPath,
                           fit: BoxFit.fill,
                         ),
                       )),
@@ -88,7 +86,7 @@ class MovieDetails extends StatelessWidget {
                               height: 3,
                             ),
                             RatingBarIndicator(
-                              rating: movieDetails.voteAverage/2,
+                              rating: movieDetails.voteAverage / 2,
                               itemBuilder: (context, index) => Icon(
                                 Icons.star,
                                 color: Colors.amber,
@@ -114,15 +112,16 @@ class MovieDetails extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  DateFormat('yyyy')
-                                      .format(DateTime.parse(movieDetails.releaseDate)),
+                                  DateFormat('yyyy').format(
+                                      DateTime.parse(movieDetails.releaseDate)),
                                   style: GoogleFonts.poppins(
                                     color: Colors.white70,
                                     fontSize: 12,
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 6),
                                   child: Container(
                                     height: 12,
                                     width: 1,
@@ -130,14 +129,15 @@ class MovieDetails extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                 movieDetails.runtime.toString()+" min",
+                                  movieDetails.runtime.toString() + " min",
                                   style: GoogleFonts.poppins(
                                     color: Colors.white70,
                                     fontSize: 12,
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 6),
                                   child: Container(
                                     height: 12,
                                     width: 1,
@@ -145,13 +145,14 @@ class MovieDetails extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  movieDetails.spokenLanguages.map((e) => e.name).join(', '),
+                                  movieDetails.spokenLanguages
+                                      .map((e) => e.name)
+                                      .join(', '),
                                   style: GoogleFonts.poppins(
                                     color: Colors.white70,
                                     fontSize: 12,
                                   ),
                                 ),
-
                               ],
                             ),
                             SizedBox(
@@ -194,10 +195,37 @@ class MovieDetails extends StatelessWidget {
                       movieDetails.overview,
                       style: GoogleFonts.poppins(
                           fontSize: 14, color: Colors.white70),
-                    )
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Star Cast',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                    ),
                   ],
                 ),
-              )
+              ),
+              SizedBox(
+                height: 110,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: credit.cast
+                      .where((element) => element.popularity > 5)
+                      .length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CastWidget(
+                      name: credit.cast[index].name,
+                      image: TMDB.imageUrl+ credit.cast[index].profilePath,
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),

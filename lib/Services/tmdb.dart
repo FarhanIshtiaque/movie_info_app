@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:movie_app/Module/Details_Page/model/cast_model.dart';
 import 'package:movie_app/Module/Details_Page/model/movie_details_model.dart';
 import 'package:movie_app/Module/Home/model/PopularResponse.dart';
 import 'package:movie_app/Module/Home/model/genre_model.dart';
@@ -64,6 +65,19 @@ class TMDB {
         'api_key': this.apiKey,
       });
       return MovieDetailsModel.fromJson(response.data);
+    }
+    on DioError catch(ex){
+      throw Exception(ex.message);
+    }
+  }
+
+
+  Future<CastModel> fetchCastById(int id)async{
+    try {
+      Response response = await dio.get('/movie/${id}/credits', queryParameters: {
+        'api_key': this.apiKey,
+      });
+      return CastModel.fromJson(response.data);
     }
     on DioError catch(ex){
       throw Exception(ex.message);

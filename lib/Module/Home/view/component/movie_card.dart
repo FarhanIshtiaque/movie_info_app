@@ -24,8 +24,12 @@ class MovieCard extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20),
       child: GestureDetector(
         onTap: (){
-          TMDB().fetchMovieById(movie.id).then((value) {
-            Get.to(MovieDetails(value));
+          TMDB().fetchMovieById(movie.id).then((details) {
+            TMDB().fetchCastById(movie.id).then((credits) {
+
+
+              Get.to(MovieDetails(details,credits));
+            });
           });
 
         },
