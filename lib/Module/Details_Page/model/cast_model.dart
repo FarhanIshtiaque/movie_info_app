@@ -1,0 +1,151 @@
+class CastModel {
+  int id;
+  List<Cast> cast;
+  List<Crew> crew;
+
+  CastModel({required this.id, required this.cast, required this.crew});
+
+  factory CastModel.fromJson(Map<String, dynamic> json) {
+    return CastModel(
+    id : json['id'],
+        cast: json['cast'] != null
+            ? json['cast'].map<Cast>((v) => Cast.fromJson(v)).toList()
+            : null,
+        crew: json['crew'] != null
+            ? json['crew'].map<Crew>((v) => Crew.fromJson(v)).toList()
+            : null,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    if (this.cast != null) {
+      data['cast'] = this.cast.map((v) => v.toJson()).toList();
+    }
+    if (this.crew != null) {
+      data['crew'] = this.crew.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Cast {
+  bool adult;
+  dynamic gender;
+  int id;
+  String knownForDepartment;
+  String name;
+  String originalName;
+  double popularity;
+  dynamic profilePath;
+  int castId;
+  String character;
+  String creditId;
+  int order;
+
+  Cast(
+      {required this.adult,
+        required this.gender,
+        required this.id,
+        required this.knownForDepartment,
+        required this.name,
+        required this.originalName,
+        required this.popularity,
+        required this.profilePath,
+        required this.castId,
+        required this.character,
+        required this.creditId,
+        required this.order});
+
+  factory Cast.fromJson(Map<String, dynamic> json) {
+    return Cast(
+    adult : json['adult'],
+    gender : json['gender'],
+    id : json['id'],
+    knownForDepartment : json['known_for_department'],
+    name : json['name'],
+    originalName : json['original_name'],
+    popularity : json['popularity'],
+    profilePath : json['profile_path'],
+    castId : json['cast_id'],
+    character : json['character'],
+    creditId : json['credit_id'],
+    order : json['order'],);
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['adult'] = this.adult;
+    data['gender'] = this.gender;
+    data['id'] = this.id;
+    data['known_for_department'] = this.knownForDepartment;
+    data['name'] = this.name;
+    data['original_name'] = this.originalName;
+    data['popularity'] = this.popularity;
+    data['profile_path'] = this.profilePath;
+    data['cast_id'] = this.castId;
+    data['character'] = this.character;
+    data['credit_id'] = this.creditId;
+    data['order'] = this.order;
+    return data;
+  }
+}
+
+class Crew {
+  bool adult;
+  int gender;
+  int id;
+  String knownForDepartment;
+  String name;
+  String originalName;
+  double popularity;
+  dynamic profilePath;
+  String creditId;
+  String department;
+  String job;
+
+  Crew(
+      {required this.adult,
+        required this.gender,
+        required this.id,
+        required this.knownForDepartment,
+        required this.name,
+        required this.originalName,
+        required this.popularity,
+        required this.profilePath,
+        required this.creditId,
+        required this.department,
+        required this.job});
+
+  factory Crew.fromJson(Map<String, dynamic> json) {
+    return Crew(
+    adult : json['adult'],
+    gender : json['gender'],
+    id : json['id'],
+    knownForDepartment : json['known_for_department'],
+    name : json['name'],
+    originalName : json['original_name'],
+    popularity : json['popularity'],
+    profilePath : json['profile_path'],
+    creditId : json['credit_id'],
+    department : json['department'],
+    job : json['job'],);
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['adult'] = this.adult;
+    data['gender'] = this.gender;
+    data['id'] = this.id;
+    data['known_for_department'] = this.knownForDepartment;
+    data['name'] = this.name;
+    data['original_name'] = this.originalName;
+    data['popularity'] = this.popularity;
+    data['profile_path'] = this.profilePath;
+    data['credit_id'] = this.creditId;
+    data['department'] = this.department;
+    data['job'] = this.job;
+    return data;
+  }
+}
