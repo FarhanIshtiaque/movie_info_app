@@ -8,7 +8,8 @@ Home screen shows cards of 20 movies, if you click on see more then 20 more will
 GetX, Dio google_fonts
 
 ### Demo
-![](movie_app_demo.gif)
+<img src="https://github.com/FarhanIshtiaque/SAYBURGH-FLUTTER-TASK-MD-FARHAN-ISHTIAQUE/blob/master/movie_app_demo.gif" height="870">
+
 
 
 
