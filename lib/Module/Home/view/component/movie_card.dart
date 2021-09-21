@@ -35,11 +35,11 @@ class MovieCard extends StatelessWidget {
         },
         child: SizedBox(
           width: width,
-          height: height * .17,
+          height: height * .20,
           child: Stack(
             children: [
               Container(
-                height: height * .17,
+                height: height * .20,
                 width: width * .85,
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(.071),
@@ -94,7 +94,8 @@ class MovieCard extends StatelessWidget {
                           child: Text(
                             movie.title,
                             softWrap: true,
-                            maxLines: 2,
+                            maxLines: 1,
+                            overflow:TextOverflow.ellipsis,
                             style: GoogleFonts.poppins(
                                 fontSize: 14,
                                 color: Colors.white,
@@ -112,7 +113,7 @@ class MovieCard extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          width: 180,
+                          width: 200,
                           child: Text(
                             genresState.getString(movie.genreIds),
                             style: GoogleFonts.poppins(
