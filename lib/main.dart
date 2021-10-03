@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_app/adapters/favourite_adapter.dart';
 import 'Module/Home/view/home.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+
+void main() async{
+  await Hive.initFlutter();
+  Hive.registerAdapter(FavouriteAdapter());
+  await Hive.openBox('Favourites');
+  
   runApp(MyApp());
 }
 
