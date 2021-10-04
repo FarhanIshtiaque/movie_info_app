@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_app/Module/Details_Page/model/cast_model.dart';
 import 'package:movie_app/Module/Details_Page/model/movie_details_model.dart';
+import 'package:movie_app/Module/Details_Page/state/favourite_state.dart';
 import 'package:movie_app/Module/Home/view/component/button_widget.dart';
 import 'package:movie_app/Services/tmdb.dart';
 import 'package:movie_app/constant.dart';
@@ -18,7 +21,9 @@ class MovieDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    var favourites = Hive.box('Favourites');
+    final state = Get.put(FavouriteState());
+    state.setFavs(favourites.values.toList());
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -40,16 +45,31 @@ class MovieDetails extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              PosterInfo(
-                posterPath: TMDB.imageUrlDetails + movieDetails.posterPath,
-                tittle: movieDetails.title,
-                rating: movieDetails.voteAverage / 2,
-                genre: movieDetails.genres.map((e) => e.name).join(', '),
-                releaseYear: DateFormat('yyyy')
-                    .format(DateTime.parse(movieDetails.releaseDate)),
-                runtime: movieDetails.runtime.toString() + " min",
-                language:
-                    movieDetails.spokenLanguages.map((e) => e.name).join(', '),
+              Obx(
+                () => PosterInfo(
+                  isExist: state.favourites.value.contains(movieDetails.id),
+                  onTap: () {
+                    if (!favourites.values.contains(movieDetails.id)) {
+                      favourites.add(movieDetails.id);
+                      state.addToFavourite(movieDetails.id);
+                    } else {
+                      int i =
+                          favourites.values.toList().indexOf(movieDetails.id);
+                      favourites.deleteAt(i);
+                      state.deleteFromFavourite(i);
+                    }
+                  },
+                  posterPath: TMDB.imageUrlDetails + movieDetails.posterPath,
+                  tittle: movieDetails.title,
+                  rating: movieDetails.voteAverage / 2,
+                  genre: movieDetails.genres.map((e) => e.name).join(', '),
+                  releaseYear: DateFormat('yyyy')
+                      .format(DateTime.parse(movieDetails.releaseDate)),
+                  runtime: movieDetails.runtime.toString() + " min",
+                  language: movieDetails.spokenLanguages
+                      .map((e) => e.name)
+                      .join(', '),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
