@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_app/Module/Details_Page/view/movie_details.dart';
 import 'package:movie_app/Module/Home/model/PopularResponse.dart';
 import 'package:movie_app/Module/Home/state/genre_state.dart';
 import 'package:movie_app/Services/tmdb.dart';
+import 'package:movie_app/adapters/favourite_adapter.dart';
 import 'package:movie_app/constant.dart';
 
 class MovieCard extends StatelessWidget {
@@ -31,6 +33,7 @@ class MovieCard extends StatelessWidget {
               Get.to(MovieDetails(details,credits));
             });
           });
+
 
         },
         child: SizedBox(

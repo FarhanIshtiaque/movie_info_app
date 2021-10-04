@@ -1,26 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:movie_app/Services/tmdb.dart';
+import 'package:movie_app/adapters/favourite_adapter.dart';
 
 class PosterInfo extends StatelessWidget {
   const PosterInfo({
-    Key? key, required this.tittle, required this.posterPath, required this.rating, required this.genre, required this.releaseYear, required this.runtime, required this.language,
+    Key? key, required this.tittle, required this.posterPath, required this.rating, required this.genre, required this.releaseYear, required this.runtime, required this.language, required this.onTap,  this.isExist=false,
 
 
   }) : super(key: key);
 
-final String tittle;
-final String posterPath;
-final double rating;
-final String genre;
-final String runtime;
-final String language;
-  final   String releaseYear;
+  final String tittle;
+  final String posterPath;
+  final double rating;
+  final String genre;
+  final String runtime;
+  final String language;
+  final String releaseYear;
+  final VoidCallback onTap;
+  final bool isExist;
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    final width = MediaQuery
+        .of(context)
+        .size
+        .width;
 
     return Stack(
       children: [
@@ -38,7 +49,7 @@ final String language;
               },
               blendMode: BlendMode.dstIn,
               child: Image.network(
-               posterPath,
+                posterPath,
                 fit: BoxFit.fill,
               ),
             )),
@@ -70,10 +81,11 @@ final String language;
                   RatingBarIndicator(
                     rating: rating,
                     //
-                    itemBuilder: (context, index) => Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
+                    itemBuilder: (context, index) =>
+                        Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
                     unratedColor: Colors.white38,
                     itemCount: 5,
                     itemSize: 16.0,
@@ -160,6 +172,19 @@ final String language;
             ),
           ),
         ),
+        Positioned(
+          right: width * .1,
+          top: height * .051,
+          child: IconButton(
+              icon: Icon(
+                isExist ? Icons.favorite :Icons.favorite_border_outlined,
+                color:isExist ? Colors.red: Colors.white ,
+                size: 40,
+              ) ,
+              onPressed: onTap
+          ),
+
+        )
       ],
     );
   }
